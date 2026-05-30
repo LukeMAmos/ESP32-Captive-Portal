@@ -1,0 +1,179 @@
+<!-- Gallery that displays the ten images uploaded on the form -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sophia's Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1e6d2b;
+            font-family: sans-serif;
+            padding: 24px 16px;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        p {
+            text-align: center;
+            color: #a7f3c0;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .empty {
+            display: none;
+        }
+        .critters {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .ladybird {
+        position: absolute;
+        width: 28px;
+        height: 28px;
+        animation: crawlLady linear infinite;
+        }
+    
+        .butterfly {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            animation: crawlButterfly linear infinite;
+        }
+        
+        @keyframes crawlLady {
+            0%   { transform: translate(0px, 0px) rotate(0deg); }
+            25%  { transform: translate(30px, -15px) rotate(20deg); }
+            50%  { transform: translate(10px, -30px) rotate(-10deg); }
+            75%  { transform: translate(-20px, -15px) rotate(15deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+        }
+        
+        @keyframes crawlButterfly {
+            0%   { transform: translate(0px, 0px) rotate(0deg); }
+            20%  { transform: translate(40px, 10px) rotate(30deg); }
+            40%  { transform: translate(20px, 30px) rotate(-20deg); }
+            60%  { transform: translate(-30px, 20px) rotate(25deg); }
+            80%  { transform: translate(-10px, -10px) rotate(-15deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+        }
+
+        .grass-gradient {
+            /* This creates a base green color */
+            background-color: #557c3e; 
+            
+            /* This creates the "drawn" blade effect using thin, angled lines */
+            background-image: 
+                repeating-linear-gradient(30deg, 
+                rgba(255,255,255,.05) 0px, rgba(255,255,255,.05) 2px, 
+                transparent 1px, transparent 20px),
+
+                repeating-linear-gradient(-45deg, 
+                rgba(0,0,0,.05) 0px, rgba(0,0,0,.05) 2px, 
+                transparent 1px, transparent 10px),
+
+                repeating-linear-gradient(-50deg, 
+                rgba(28, 27, 27, 0.05) 0px, rgba(52, 51, 51, 0.05) 2px, 
+                transparent 3px, transparent 20px),
+
+                repeating-linear-gradient(55deg, 
+                rgba(154, 147, 147, 0.05) 0px, rgba(183, 172, 172, 0.05) 2px, 
+                transparent 3px, transparent 20px);
+
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="grass-gradient" style="position: fixed; inset: 0; z-index: 0;">
+    <div class="critters" id="critters"></div>
+    <h1 class="title">Sophia's Gallery </h1>
+    <!-- Gallery that displays the ten images uploaded on the form -->
+    <div class="gallery">
+        <img src="/img?slot=0" alt="Photo 1" onerror="this.classList.add('empty')">
+        <img src="/img?slot=1" alt="Photo 2" onerror="this.classList.add('empty')">
+        <img src="/img?slot=2" alt="Photo 3" onerror="this.classList.add('empty')">
+        <img src="/img?slot=3" alt="Photo 4" onerror="this.classList.add('empty')">
+        <img src="/img?slot=4" alt="Photo 5" onerror="this.classList.add('empty')">
+        <img src="/img?slot=5" alt="Photo 6" onerror="this.classList.add('empty')">
+        <img src="/img?slot=6" alt="Photo 7" onerror="this.classList.add('empty')">
+        <img src="/img?slot=7" alt="Photo 8" onerror="this.classList.add('empty')">
+        <img src="/img?slot=8" alt="Photo 9" onerror="this.classList.add('empty')">
+        <img src="/img?slot=9" alt="Photo 10" onerror="this.classList.add('empty')">
+    </div>
+    </div>
+
+
+    <script>
+        function makeLadybird(x, y, dur) {
+            const img = document.createElement('img'); 
+            img.src = 'Ladybug-removebg-preview.png'; 
+            img.classList.add('ladybird');
+            img.style.left = x + 'px';
+            img.style.top = y + 'px';
+            img.style.animationDuration = dur / 2 + 's';
+            img.style.animationDelay = -(Math.random() * dur) + 's';
+            return img;
+        }
+        
+        function makeButterfly(x, y, dur) {
+            const img = document.createElement('img'); 
+            img.src = 'buttery-removebg-preview.png'; 
+            img.classList.add('butterfly');
+            img.style.left = x + 'px';
+            img.style.top = y + 'px';
+            img.style.animationDuration = dur / 2  + 's';
+            img.style.animationDelay = -(Math.random() * dur) + 's';
+            return img;
+        }
+        
+        function spawnCritters() {
+            const container = document.getElementById('critters');
+            const W = window.innerWidth;
+            const H = Math.max(document.body.scrollHeight, 800);
+            for (let i = 0; i < 8; i++) {
+                container.appendChild(makeLadybird(Math.random() * (W - 40), Math.random() * (H - 40), 8 + Math.random() * 6));
+            }
+            for (let i = 0; i < 14; i++) {
+                container.appendChild(makeButterfly(Math.random() * (W - 30), Math.random() * (H - 30), 5 + Math.random() * 5));
+            }
+        }
+        
+        spawnCritters();
+    </script>
+</body>
+<footer>
+    <p style="text-align: center; margin-top: 20px; color: #6b7280;"> Happy Birthday Sophia! I love you to the moon and back</p>
+</footer>
+</html>

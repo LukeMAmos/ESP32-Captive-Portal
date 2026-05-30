@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sophia's Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 22px;
+            font-family: fantasy;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        p {
+            text-align: center;
+            color: #a7f3c0;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .gallery img {
+            display: block;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            max-width: 300px;
+            margin: 0 auto 24px auto;
+            clip-path: path('M 150,30 C 180,0 230,20 220,70 C 270,60 300,110 260,140 C 300,170 270,220 220,210 C 230,260 180,280 150,250 C 120,280 70,260 80,210 C 30,220 0,170 40,140 C 0,110 30,60 80,70 C 70,20 120,0 150,30 Z');
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .empty {
+            display: none;
+        }
+
+        .grass-gradient {
+            background-color: #5e8448e4;
+        }
+        .upload-btn {
+            display: block;
+            margin: 0 auto 24px auto;
+            padding: 12px 28px;
+            background-color: #1e6d2b;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grass-gradient" style="position: fixed; inset: 0; z-index: 0;"></div>
+
+    <div style="position: relative; z-index: 2; padding: 24px 16px;">
+        <h1>I love you</h1>
+        <a href="/upload.html" class="upload-btn">Upload Photos</a>
+        <div class="gallery">
+            <img src="/img?slot=0" alt="Photo 1" onerror="this.classList.add('empty')">
+            <img src="/img?slot=1" alt="Photo 2" onerror="this.classList.add('empty')">
+            <img src="/img?slot=2" alt="Photo 3" onerror="this.classList.add('empty')">
+            <img src="/img?slot=3" alt="Photo 4" onerror="this.classList.add('empty')">
+            <img src="/img?slot=4" alt="Photo 5" onerror="this.classList.add('empty')">
+            <img src="/img?slot=5" alt="Photo 6" onerror="this.classList.add('empty')">
+            <img src="/img?slot=6" alt="Photo 7" onerror="this.classList.add('empty')">
+            <img src="/img?slot=7" alt="Photo 8" onerror="this.classList.add('empty')">
+            <img src="/img?slot=8" alt="Photo 9" onerror="this.classList.add('empty')">
+            <img src="/img?slot=9" alt="Photo 10" onerror="this.classList.add('empty')">
+        </div>
+        <footer>
+            <p style="margin-top: 20px; color: #ad95c8;">Happy Birthday Sophia! I love you to the moon and back</p>
+        </footer>
+    </div>
+</body>
+</html>
